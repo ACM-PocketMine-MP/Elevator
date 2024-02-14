@@ -2,24 +2,23 @@
 
 namespace Ayzrix\Elevator;
 
-use Ayzrix\Elevator\Events\Listeners\PlayerListener;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\SingletonTrait;
 
-class Main extends PluginBase {
+use Ayzrix\Elevator\Events\Listeners\PlayerListener;
 
-    /** @var Main $instance */
-    private static $instance;
-
-    public function onEnable() {
-        self::$instance = $this;
-        $this->saveDefaultConfig();
-        $this->getServer()->getPluginManager()->registerEvents(new PlayerListener(), $this);
-    }
+class Main extends PluginBase{
+    use SingletonTrait;
 
     /**
-     * @return Main
+     * @return void
      */
-    public static function getInstance(): Main {
-        return self::$instance;
+    public function onLoad(): void{ self::setInstance($this); }
+    /**
+     * @return void
+     */
+    public function onEnable(): void{
+        $this->saveDefaultConfig();
+        $this->getServer()->getPluginManager()->registerEvents(new PlayerListener, $this);
     }
 }
