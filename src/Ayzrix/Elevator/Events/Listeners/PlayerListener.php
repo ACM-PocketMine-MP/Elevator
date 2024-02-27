@@ -18,7 +18,7 @@ class PlayerListener implements Listener {
     public function onPlayerJump(PlayerJumpEvent $event): bool{
         $player = $event->getPlayer();
         $level = $player->getWorld();
-        $blockId = Utils::getIntoConfig("block");
+        $blockId = strtolower(Utils::getIntoConfig("block"));
         $block = $level->getBlock($player->getPosition()->subtract(0, 1, 0));
         if(ElevatorAPI::getWorldsEnabled($player)){
             if(strtolower($block->getName()) !== $blockId) return false;
@@ -52,7 +52,7 @@ class PlayerListener implements Listener {
     public function onPlayerToggleSneak(PlayerToggleSneakEvent $event): bool{
         $player = $event->getPlayer();
         $level = $player->getWorld();
-        $blockId = Utils::getIntoConfig("block");
+        $blockId = strtolower(Utils::getIntoConfig("block"));
         $block = $level->getBlock($player->getPosition()->subtract(0, 1, 0));
         if(ElevatorAPI::getWorldsEnabled($player)){
             if(!$event->isSneaking()) return false;
