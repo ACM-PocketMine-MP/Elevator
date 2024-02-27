@@ -24,7 +24,7 @@ class ElevatorAPI{
     public static function isElevatorBlock(int $x, int $y, int $z, World $level): ?Block{
         $elevator = $level->getBlockAt($x, $y, $z);
         $blockId = Utils::getIntoConfig("block");
-        if(strtolower($elevator->getName()) !== $blockId){
+        if(strtolower($elevator->getName()) !== strtolower($blockId)){
             return null;
         }
         return $elevator;
